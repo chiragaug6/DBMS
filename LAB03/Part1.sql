@@ -33,11 +33,11 @@ SELECT FirstName, LastName,City FROM STUDENT WHERE CITY LIKE '_____a'
 
 SELECT * FROM STUDENT WHERE LastName LIKE '%tel';
 
---5. Display All the Students Whose First Name Starts with �ha� & Ends with �t�
+--5. Display All the Students Whose First Name Starts with 'ha' & Ends with 't'
 
 SELECT * FROM STUDENT WHERE FirstName LIKE 'HA%T'
 
---6. Display All the Students Whose First Name Starts with �k� and the Third Character is �y�
+--6. Display All the Students Whose First Name Starts with 'k' and the Third Character is 'y'
 
 SELECT * FROM STUDENT WHERE FirstName LIKE 'K_Y%'
 
@@ -45,11 +45,11 @@ SELECT * FROM STUDENT WHERE FirstName LIKE 'K_Y%'
 
 SELECT * FROM STUDENT WHERE Website IS NULL AND FirstName LIKE '_____';
 
---8. Display All the Students Whose Last Name Consists of �jer�
+--8. Display All the Students Whose Last Name Consists of 'jer'
 
 SELECT * FROM STUDENT WHERE LastName LIKE '%JER%'
 
---9. Display All the Students Whose City Name Starts with Either �r� or �b�
+--9. Display All the Students Whose City Name Starts with Either 'r' or 'b'
 
 SELECT * FROM STUDENT WHERE CITY LIKE 'R%' or CITY LIKE 'B%';
 
@@ -63,31 +63,31 @@ SELECT * FROM STUDENT WHERE Website IS NOT NULL;
 
 SELECT * FROM STUDENT WHERE FirstName LIKE '[A-H]%'
 
---12. Display All the Students Whose Name�s Second Character is a Vowel
+--12. Display All the Students Whose Name's Second Character is a Vowel
 
 SELECT * FROM STUDENT WHERE FirstName LIKE '_[AEIOU]%'
 
---13. Display Student�s Name Whose City Name Consists of �rod�
+--13. Display Student's Name Whose City Name Consists of 'rod'
 
 SELECT * FROM STUDENT WHERE CITY LIKE '%ROD%'
 
---14. Retrieve the First & Last Name of Students Whose Website Name Starts with �bi�
+--14. Retrieve the First & Last Name of Students Whose Website Name Starts with 'bi'
 
 SELECT * FROM STUDENT WHERE Website LIKE 'bi%';
 
---15. Display Student�s City Whose Last Name Consists of Six Characters
+--15. Display Student's City Whose Last Name Consists of Six Characters
 
 SELECT * FROM STUDENT WHERE LastName LIKE '______'
 
---16. Display All the Students Whose City Name Consists of Five Characters & Does Not Start with �ba'
+--16. Display All the Students Whose City Name Consists of Five Characters & Does Not Start with 'ba'
 
 SELECT * FROM STUDENT WHERE LEN(City) = 5 AND City NOT LIKE 'ba%';
 
---17. Show All the Students Whose Division Starts with �II�
+--17. Show All the Students Whose Division Starts with 'II'
 
 SELECT * FROM STUDENT WHERE Division LIKE 'II%'
 
---18. Find Out Student�s First Name Whose Division Contains �bc� Anywhere in Division Name
+--18. Find Out Student's First Name Whose Division Contains 'bc' Anywhere in Division Name
 
 SELECT * FROM STUDENT WHERE Division LIKE '%bc%';
 
@@ -95,7 +95,7 @@ SELECT * FROM STUDENT WHERE Division LIKE '%bc%';
 
 SELECT StuID, City FROM STUDENT WHERE LEN(Division) = 6 AND Website IS NOT NULL;
 
---20. Display All the Students Whose Name�s Third Character is a Consonant
+--20. Display All the Students Whose Name's Third Character is a Consonant
 
 SELECT * FROM Students WHERE Name LIKE '__[^AEIOUaeiou]%'
 
