@@ -70,49 +70,56 @@ INSERT INTO EMP_DEPARTMENT (DPT_CODE, DPT_NAME, DPT_ALLOTMENT) VALUES
 --Return Average Price and Company. 
 
 SELECT 
-    (SELECT AVG(p.Price) 
-     FROM Products p 
-     WHERE p.COM_ID = c.COM_ID) AS [Average Price], 
-    c.COM_NAME AS Company
+    (SELECT AVG(PRO_PRICE) 
+     FROM ITEM_MASTER I 
+     WHERE I.PRO_COM = C.COM_ID) AS [Average Price], 
+    C.COM_NAME AS Company
 FROM 
-    COMPANY_MASTER c;
+    COMPANY_MASTER C;
 
 --2.Calculate the average price of each manufacturer's product where the price is 350 or more using a subquery.
 
 SELECT 
-    (SELECT AVG(p.Price) 
-     FROM Products p 
-     WHERE p.COM_ID = c.COM_ID AND p.Price >= 350) AS [Average Price], 
-    c.COM_NAME AS Company
+    (SELECT AVG(I.PRO_PRICE) 
+     FROM ITEM_MASTER I 
+     WHERE I.PRO_COM = C.COM_ID AND I.PRO_PRICE >= 350) AS [Average Price], 
+    C.COM_NAME AS Company
 FROM 
-    COMPANY_MASTER c;
+    COMPANY_MASTER C;
 
 --3.Find the most expensive product of each company using a subquery.
 
 SELECT 
-    p.ProductName, 
-    p.Price, 
-    c.COM_NAME AS Company
+    I.PRO_NAME AS ProductName, 
+    I.PRO_PRICE AS Price, 
+    (SELECT C.COM_NAME 
+     FROM COMPANY_MASTER C 
+     WHERE C.COM_ID = I.PRO_COM) AS Company
 FROM 
-    Products p
-JOIN 
-    COMPANY_MASTER c ON p.COM_ID = c.COM_ID
+    ITEM_MASTER I
 WHERE 
-    p.Price = (SELECT MAX(p2.Price) 
-               FROM Products p2 
-               WHERE p2.COM_ID = p.COM_ID);
+    PRO_PRICE = (
+        SELECT MAX(PRO_PRICE) 
+        FROM ITEM_MASTER 
+        WHERE PRO_COM = I.PRO_COM
+    );
+
 
 --4. Find employees whose last name is Gabriel or Dosio using a subquery.
 
 SELECT 
-    emp_idno, 
-    emp_fname, 
-    emp_lname, 
-    emp_dept
+    E.EMP_IDNO, 
+    E.EMP_FNAME, 
+    E.EMP_LNAME, 
+    (SELECT DPT_NAME 
+     FROM EMP_DEPARTMENT D 
+     WHERE D.DPT_CODE = E.EMP_DEPT) AS EMP_DEPT
 FROM 
-    Employees
+    EMP_DETAILS E
 WHERE 
-    emp_lname IN (SELECT 'Gabriel' UNION SELECT 'Dosio');
+    E.EMP_LNAME = (SELECT 'Gabriel') 
+    OR 
+    E.EMP_LNAME = (SELECT 'Dosio');
 
 --5.Find the employees who work in department 89 or 63 using a subquery
 
