@@ -1,10 +1,27 @@
+CREATE TABLE SALESMAN (
+    salesman_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    city VARCHAR(50),
+    commission DECIMAL(4, 2)
+);
+
+CREATE TABLE CUSTOMER (
+    customer_id INT PRIMARY KEY,
+    cust_name VARCHAR(50) NOT NULL,
+    city VARCHAR(50),
+    Grade INT,
+    salesman_id INT REFERENCES SALESMAN(salesman_id) 
+);
+
 CREATE TABLE ORDERS (
     ord_no INT,
     purch_amt DECIMAL(10, 2),
     ord_date DATE,
-    customer_id INT,
-    salesman_id INT
+    customer_id INT REFERENCES CUSTOMER(customer_id),
+    salesman_id INT REFERENCES SALESMAN(salesman_id)
 );
+
+select * from ORDERS
 
 INSERT INTO ORDERS (ord_no, purch_amt, ord_date, customer_id, salesman_id) VALUES
 (70001, 150.50, '2012-10-05', 3005, 5002),
@@ -23,14 +40,9 @@ INSERT INTO ORDERS (ord_no, purch_amt, ord_date, customer_id, salesman_id) VALUE
 (70009, 270.65, '2012-09-10', 3001, 5005),
 (70002, 65.26, '2012-10-05', 3002, 5001);
 
-CREATE TABLE SALESMAN (
-    salesman_id INT,
-    name VARCHAR(50),
-    city VARCHAR(50),
-    commission DECIMAL(4, 2)
-);
+SELECT * FROM SALESMAN;
 
-INSERT INTO SALESMAN (salesman_id, name, city, commission) VALUES
+INSERT INTO SALESMAN VALUES
 (5001, 'James Hoog', 'New York', 0.15),
 (5002, 'Nail Knite', 'Paris', 0.13),
 (5005, 'Pit Alex', 'London', 0.11),
@@ -38,13 +50,7 @@ INSERT INTO SALESMAN (salesman_id, name, city, commission) VALUES
 (5007, 'Paul Adam', 'Rome', 0.13),
 (5003, 'Lauson Hen', 'San Jose', 0.12);
 
-CREATE TABLE CUSTOMER (
-    customer_id INT,
-    cust_name VARCHAR(50),
-    city VARCHAR(50),
-    Grade INT,
-    salesman_id INT
-);
+SELECT * FROM CUSTOMER;
 
 INSERT INTO CUSTOMER (customer_id, cust_name, city, Grade, salesman_id) VALUES
 (3002, 'Nick Rimando', 'New York', 100, 5001),
@@ -88,7 +94,7 @@ SELECT
     c.cust_name AS Customer,
     c.city AS City,
     s.name AS Salesman,
-    s.commission
+    s.Commission
 FROM 
     CUSTOMER c
 JOIN 
@@ -192,13 +198,17 @@ WHERE
 ORDER BY 
     c.customer_id ASC;
 
---10. Write a SQL statement to make a report with customer name, city, order number, order date, and order 
---amount in ascending order according to the order date to determine whether any of the existing customers 
+--10. Write a SQL statement to make a report with customer name, city, order number, order date, and order  amount in ascending order according to the order date to determine whether any of the existing customers 
 --have placed an order or not. 
 
 SELECT c.cust_name AS Customer, c.city AS City, o.ord_no AS Order_Number, o.ord_date AS Order_Date, o.purch_amt AS Order_Amount
 FROM CUSTOMER c
 LEFT JOIN ORDERS o ON c.customer_id = o.customer_id
 ORDER BY o.ord_date ASC;
+
+
+
+
+
 
 

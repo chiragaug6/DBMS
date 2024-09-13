@@ -17,6 +17,8 @@ INSERT INTO COMPANY (Title, Company, Type, Production_year, System, Production_c
 ('Tap Tap Hex!', 'PixelGaming Inc.', 'rhythm', 2006, 'PS2', 2500000, 3500000, 7),
 ('NoRisk', 'Simone Games', 'action adventure', 2004, 'PS2', 1400000, 3400000, 8);
 
+SELECT * FROM COMPANY
+
 --1. Display the name and total revenue for each company.  
 
 SELECT 
@@ -35,13 +37,13 @@ for that year (named avg_revenue).
 
 SELECT 
     Production_year,
-    COUNT(*) AS Count,
-    AVG(Production_cost) AS Avg_Cost,
-    AVG(Revenue) AS Avg_Revenue
+    COUNT(*) AS count,
+    AVG(Production_cost) AS avg_cost,
+    AVG(Revenue) AS avg_revenue
 FROM 
     COMPANY
 GROUP BY 
-    Production_year;
+    Production_year
 
 /**
 3. Count how many games of a given type are profitable (i.e. the revenue was greater than the production 

@@ -39,16 +39,18 @@ WHERE
 
 --4. Write a SQL query to find the departments with the second lowest sanction amount. Return emp_fname and emp_lname 
 
-SELECT 
-    e.emp_fname, 
-    e.emp_lname
-FROM 
-    Employees e
-WHERE 
-    e.emp_dept = (SELECT d.dpt_code 
-                  FROM Departments d 
-                  WHERE d.dpt_allotment = (SELECT MIN(d2.dpt_allotment) 
-                                           FROM Departments d2 
-                                           WHERE d2.dpt_allotment > 
-                                           (SELECT MIN(d3.dpt_allotment) 
-                                            FROM Departments d3)));
+SELECT EMP_FNAME, EMP_LNAME 
+FROM EMP_DETAILS 
+WHERE EMP_DEPT = (
+    SELECT DPT_CODE 
+    FROM EMP_DEPARTMENT 
+    WHERE DPT_ALLOTMENT = (
+        SELECT MIN(DPT_ALLOTMENT) 
+        FROM EMP_DEPARTMENT 
+        WHERE DPT_ALLOTMENT > (
+            SELECT MIN(DPT_ALLOTMENT) 
+            FROM EMP_DEPARTMENT
+        )
+    )
+);
+
