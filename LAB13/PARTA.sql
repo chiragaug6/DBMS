@@ -20,14 +20,21 @@ CREATE TABLE PersonLog (
     UpdateDate DATETIME NOT NULL
 );
 
---1. Create a trigger that fires on INSERT, UPDATE and DELETE operation on the Person table to display a message “Record is Affected.”CREATE TRIGGER trg_Person_Affected
+--1. Create a trigger that fires on INSERT, UPDATE and DELETE operation on the Person table to display a message ï¿½Record is Affected.ï¿½
+
+
+CREATE TRIGGER trg_Person_Affected
 ON Person
 AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
     PRINT 'Record is Affected.'
 END;
---Create a trigger that fires on INSERT, UPDATE and DELETE operation on the Person table. For that, log all operations performed on the person table into PersonLogCREATE TRIGGER trg_Person_Log
+
+--Create a trigger that fires on INSERT, UPDATE and DELETE operation on the Person table. For that, log all operations performed on the person table into PersonLog
+
+
+CREATE TRIGGER trg_Person_Log
 ON Person
 AFTER INSERT, UPDATE, DELETE
 AS
@@ -56,5 +63,6 @@ BEGIN
         FROM deleted;
     END
 END;
-
+
+
 
